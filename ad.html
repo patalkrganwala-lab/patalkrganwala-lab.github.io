@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Barsha 🎄</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  background: linear-gradient(180deg, #0b132b, #000);
+  color: white;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+.container {
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 1.8s ease;
+}
+
+/* BIG BOX */
+.box-wrapper {
+  margin-top: 30vh;
+}
+
+.big-box {
+  font-size: 120px;
+  cursor: pointer;
+  animation: pulse 1.6s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+/* SMALL BOXES */
+.small-boxes {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 40vh;
+}
+
+.small-box {
+  background: rgba(255,255,255,0.2);
+  border-radius: 10px;
+  padding: 16px;
+  width: 80px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* LETTER */
+.letter {
+  max-width: 92%;
+  margin: 40px auto;
+  background: rgba(255,255,255,0.12);
+  padding: 24px;
+  border-radius: 18px;
+  text-align: left;
+  line-height: 1.8;
+  font-size: 15.5px;
+  opacity: 0;
+  transform: translateY(25px);
+  animation: fadeUp 2.5s ease forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* SNOW */
+.snow {
+  position: fixed;
+  top: -10px;
+  color: white;
+  opacity: 0.7;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to { transform: translateY(110vh); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- BIG BOX -->
+  <div id="bigBox" class="box-wrapper">
+    <div class="big-box" onclick="openBigBox()">🎁</div>
+    <p>Open it</p>
+  </div>
+
+  <!-- SMALL BOXES -->
+  <div id="smallBoxes" class="small-boxes hidden">
+    <div class="small-box" onclick="openSmall(this)">🎁</div>
+    <div class="small-box" onclick="openSmall(this)">🎁</div>
+    <div class="small-box" onclick="openSmall(this)">🎁</div>
+    <div class="small-box" onclick="openSmall(this)">🎁</div>
+    <div class="small-box" onclick="openSmall(this)">🎁</div>
+  </div>
+
+  <!-- LETTER -->
+  <div id="letter" class="hidden">
+    <div class="letter">
+      <h3>Hello hello, Barshaaa Madam 🌙✨</h3>
+
+      <p>I never imagined that we would meet like this—so suddenly, so unexpectedly—and that within just one year, you would become such an important part of my life. I was a quiet, lonely, introverted “bolod” person, lost inside my own world. And then you came. Slowly, gently, you changed me. You made me better.</p>
+
+      <p>You saw a side of me that no one else ever noticed—the side I couldn’t even explain with words. Yet somehow, you understood every little messy thought, every tangled emotion, every silence.</p>
+
+      <p>You are special to me in a way words can’t fully hold. Thank you for becoming my friend.</p>
+
+      <p>You are my safe place.</p>
+
+      <p>Thank you for being the most beautiful gift this year gave me.</p>
+
+      <p>I promise I’ll be there for you till the end of my life—and even after that, maybe as a cat 🐾.</p>
+
+      <p>Let’s step into this new year together and create memories that feel warm, gentle, and forever ✨</p>
+
+      <p>And one small secret… I cried because I was happy—because you were with me.</p>
+
+      <p><strong>— From your “utpate idur neel”</strong></p>
+    </div>
+  </div>
+
+  <!-- MUSIC -->
+  <audio id="bgSong">
+    <!-- PLACE YOUR MP3 FILE IN SAME FOLDER AND RENAME -->
+    <source src="blue-yung-kai.mp3" type="audio/mpeg">
+  </audio>
+
+</div>
+
+<script>
+const words = ["You", "are", "My", "Precious", "Gift"];
+let count = 0;
+
+function openBigBox() {
+  const big = document.getElementById("bigBox");
+  big.classList.add("fade-out");
+
+  setTimeout(() => {
+    big.classList.add("hidden");
+    document.getElementById("smallBoxes").classList.remove("hidden");
+  }, 1800);
+}
+
+function openSmall(el) {
+  if (el.dataset.done) return;
+  el.innerText = words[count];
+  el.dataset.done = true;
+  count++;
+
+  if (count === 5) {
+    const boxes = document.getElementById("smallBoxes");
+    setTimeout(() => {
+      boxes.classList.add("fade-out");
+    }, 600);
+
+    setTimeout(() => {
+      boxes.classList.add("hidden");
+      document.getElementById("letter").classList.remove("hidden");
+      document.getElementById("bgSong").play();
+    }, 2400);
+  }
+}
+
+// Snow
+for (let i = 0; i < 35; i++) {
+  let s = document.createElement("div");
+  s.className = "snow";
+  s.innerHTML = "❄";
+  s.style.left = Math.random() * 100 + "vw";
+  s.style.fontSize = Math.random() * 10 + 8 + "px";
+  s.style.animationDuration = Math.random() * 8 + 6 + "s";
+  document.body.appendChild(s);
+}
+</script>
+
+</body>
+</html>
